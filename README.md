@@ -1,14 +1,22 @@
-# ms_map_utils
+# Overview
 
-A new Flutter package project.
+A simple lib to incremease Map with usefull functions
 
-## Getting Started
+## Whats MS_Map_Utils do
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Add usefull functions to map:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+- `trim` trim all Strings in a map _it's recursive_
+- `compact` remove all MapEntries thats values is `null` _it's recursive too_
+
+## Usage
+
+Just import lib and use [extensions](https://dart.dev/guides/language/extension-methods), call the functions to starts work:
+
+```dart
+import 'package:ms_map_utils/ms_map_utils.dart';
+
+Map itsAMap = {'key1':null,'key2':'         just a String withs extras spaces en start and end            '};
+itsAMap.compact(); // Output: {'key2':'         just a String withs extras spaces en start and end            '}
+itsAMap.trim(); // Output: {'key2':'just a String withs extras spaces en start and end'}
+```
