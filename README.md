@@ -1,3 +1,5 @@
+[![Pub](https://img.shields.io/pub/v/ms_map_utils.svg)](https://pub.dartlang.org/packages/ms_map_utils)
+
 # Overview
 
 A simple lib to incremease Map with usefull functions
