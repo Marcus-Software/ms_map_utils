@@ -1,6 +1,6 @@
 /// Return a new map without null values
 Map<K, V> compact<K, V>(Map map, [bool newMap = false]) =>
-    (newMap ? Map<K, V>.from(map) : map)
+    (newMap ? Map<K, V>.from(map) : map).cast<K, V>()
       ..removeWhere((_, value) {
         if (value is Map && value != null) {
           compact(value, newMap);
@@ -13,8 +13,8 @@ Map<K, V> compact<K, V>(Map map, [bool newMap = false]) =>
       });
 
 /// Trim every value is a String if recursive with map and lists with map
-Map<K, V> trim<K, V>(Map map, [bool newMap = false]) {
-  return (newMap ? Map<K, V>.from(map) : map).map((key, value) {
+Map trim(Map map, [bool newMap = false]) {
+  return (newMap ? Map.from(map) : map).map((key, value) {
     var tmpValue = value;
     if (value is String) {
       tmpValue = value.trim();
@@ -27,11 +27,25 @@ Map<K, V> trim<K, V>(Map map, [bool newMap = false]) {
   });
 }
 
+typedef T ReduceFunction<T>(T accumulated, currentKey, currentValue);
+
+T reduce<T>(Map map, ReduceFunction<T> reduceFunction) {
+  T accumulated;
+  map.forEach((key, value) {
+    accumulated = reduceFunction(accumulated, key, value);
+  });
+  return accumulated;
+}
+
 Function _compact = compact;
 Function _trim = trim;
+Function _reduce = reduce;
 
 extension of on Map {
-  Map compact([bool newMap = false]) => _compact(this, newMap);
+  Map compact([bool newMap = false]) => _compact(this, newMap) as Map;
 
-  Map trim([bool newMap = false]) => _trim(this, newMap);
+  Map trim([bool newMap = false]) => _trim(this, newMap) as Map;
+
+  Tp reduce<Tp>(ReduceFunction<Tp> reduceFunction) =>
+      _reduce<Tp>(this, reduceFunction) as Tp;
 }
