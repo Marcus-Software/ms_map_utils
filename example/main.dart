@@ -12,12 +12,18 @@ void main(List<String> args) {
     'key2':
         '         just a String withs extras spaces en start and end            '
   };
-  
+
   // Will remove key1
   // {key2:          just a String withs extras spaces en start and end            }
   print(justMap.compact());
-  
+
   // Will trim value string
   // {key2: just a String withs extras spaces en start and end}
   print(justMap.trim());
+
+  Map mapNumbers = {'key1': 50, 'key2': 7, 'key3': 71, 'key4': 45, 'key5': 5};
+  // In reduceFunction you must check is acc is null and set a initial value for it
+  var sumValues = mapNumbers.reduce<int>((int accumulated, _, value) =>
+      (accumulated ?? 0) + (value as int)); // Output 178
+  print(sumValues);
 }
