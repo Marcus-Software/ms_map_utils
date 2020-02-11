@@ -149,7 +149,90 @@ void main() {
       };
       var value = mapNumbers
           .reduce<String>((String acc, key, _) => (acc ?? '') + key.toString());
-      expect(value, 'key1key2key3key4key5', reason: "Value reduced must be 'key1key2key3key4key5'");
+      expect(value, 'key1key2key3key4key5',
+          reason: "Value reduced must be 'key1key2key3key4key5'");
+    });
+  });
+
+  group('RemoveKeysExcept', () {
+    test('Remove all entries that has a key NOT in list', () {
+      Map mapNumbers = {
+        'key1': 1,
+        'key2': 2,
+        'key3': 3,
+        'key4': 4,
+        'key5': 5,
+        'map': {
+          'key1': 1,
+          'key2': 2,
+          'key3': 3,
+          'key4': 4,
+          'key5': 5,
+        }
+      };
+      mapNumbers.removeKeysExcept(['key1', 'key2', 'map']);
+      expect(mapNumbers.length, 3);
+      expect(mapNumbers['map'].length, 5);
+    });
+    test('Remove all entries that has a key NOT in list with recursive', () {
+      Map mapNumbers = {
+        'key1': 1,
+        'key2': 2,
+        'key3': 3,
+        'key4': 4,
+        'key5': 5,
+        'map': {
+          'key1': 1,
+          'key2': 2,
+          'key3': 3,
+          'key4': 4,
+          'key5': 5,
+        }
+      };
+      mapNumbers.removeKeysExcept(['key1', 'key2', 'map'], true);
+      expect(mapNumbers.length, 3);
+      expect(mapNumbers['map'].length, 2);
+    });
+  });
+
+  group('RemoveKeys', () {
+    test('Remove all entries that has a key in list', () {
+      Map mapNumbers = {
+        'key1': 1,
+        'key2': 2,
+        'key3': 3,
+        'key4': 4,
+        'key5': 5,
+        'map': {
+          'key1': 1,
+          'key2': 2,
+          'key3': 3,
+          'key4': 4,
+          'key5': 5,
+        }
+      };
+      mapNumbers.removeKeys(['key1', 'key2']);
+      expect(mapNumbers.length, 4);
+      expect(mapNumbers['map'].length, 5);
+    });
+    test('Remove all entries that has a key in list with recursive', () {
+      Map mapNumbers = {
+        'key1': 1,
+        'key2': 2,
+        'key3': 3,
+        'key4': 4,
+        'key5': 5,
+        'map': {
+          'key1': 1,
+          'key2': 2,
+          'key3': 3,
+          'key4': 4,
+          'key5': 5,
+        }
+      };
+      mapNumbers.removeKeys(['key1', 'key2'], true);
+      expect(mapNumbers.length, 4);
+      expect(mapNumbers['map'].length, 3);
     });
   });
 }

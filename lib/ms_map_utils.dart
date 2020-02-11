@@ -29,6 +29,7 @@ Map trim(Map map, [bool newMap = false]) {
 
 typedef T ReduceFunction<T>(T accumulated, currentKey, currentValue);
 
+/// Reduce functions
 T reduce<T>(Map map, ReduceFunction<T> reduceFunction) {
   T accumulated;
   map.forEach((key, value) {
@@ -37,9 +38,34 @@ T reduce<T>(Map map, ReduceFunction<T> reduceFunction) {
   return accumulated;
 }
 
+void removeKeys(Map map, List keys, [bool recursive = false]) {
+  map.removeWhere((key, value) {
+    if (keys.contains(key)) {
+      return true;
+    } else if (value is Map && recursive) {
+      removeKeys(value, keys, recursive);
+    }
+    return false;
+  });
+}
+
+void removeKeysExcept(Map map, List keys, [bool recursive = false]) {
+  map.removeWhere((key, value) {
+    if (keys.contains(key)) {
+      if (value is Map && recursive) {
+        removeKeysExcept(value, keys, recursive);
+      }
+      return false;
+    }
+    return true;
+  });
+}
+
 Function _compact = compact;
 Function _trim = trim;
 Function _reduce = reduce;
+Function _removeKeys = removeKeys;
+Function _removeKeysExcept = removeKeysExcept;
 
 extension of on Map {
   Map compact([bool newMap = false]) => _compact(this, newMap) as Map;
@@ -48,4 +74,10 @@ extension of on Map {
 
   Tp reduce<Tp>(ReduceFunction<Tp> reduceFunction) =>
       _reduce<Tp>(this, reduceFunction) as Tp;
+
+  void removeKeys(List keys, [bool recursive = false]) =>
+      _removeKeys(this, keys, recursive);
+
+  void removeKeysExcept(List keys, [bool recursive = false]) =>
+      _removeKeysExcept(this, keys, recursive);
 }
