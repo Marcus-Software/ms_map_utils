@@ -9,6 +9,8 @@ Add usefull functions to map:
 - `trim` trim all Strings in a map _it's recursive_
 - `compact` remove all MapEntries thats values is `null` _it's recursive too_
 - `reduce` iterate all items in `Map` for reduce to a unique value returned from callback `ReduceFunction`.
+- `removeKeys` remove all entries that contains a key in list.
+- `removeKeysExcept` remove all entries that NOT contains a key in list.
 
 ## Usage
 
@@ -24,4 +26,6 @@ itsAMap.trim(); // Output: {'key2':'just a String withs extras spaces en start a
 Map mapNumbers = {'key1':50,'key2':7,'key3':71,'key4':45,'key5':5};
 // In reduceFunction you must check if `accumulated` is null and set a initial value for it
 mapNumbers.reduce<int>((int accumulated, _, value) => (accumulated ?? 0) + (value as int)); // Output 178
+mapNumbers.removeKeys(['key1','key5']); //{'key2':7,'key3':71,'key4':45}
+mapNumbers.removeKeysExcept(['key3']); //{'key3':71}
 ```

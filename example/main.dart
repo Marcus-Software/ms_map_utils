@@ -26,4 +26,8 @@ void main(List<String> args) {
   var sumValues = mapNumbers.reduce<int>((int accumulated, _, value) =>
       (accumulated ?? 0) + (value as int)); // Output 178
   print(sumValues);
+  mapNumbers.removeKeys(['key1', 'key5']);
+  print(mapNumbers);
+  mapNumbers.removeKeysExcept(['key3']);
+  print(mapNumbers);
 }
