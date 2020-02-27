@@ -18,3 +18,5 @@ jobs:
       run: pub run test
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
+      with: 
+        github-token: ${{ secrets.COVERALLS_MS_MAP_UTILS_TOKEN }}
