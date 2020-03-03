@@ -11,6 +11,7 @@ Add usefull functions to map:
 - `reduce` iterate all items in `Map` for reduce to a unique value returned from callback `ReduceFunction`.
 - `removeKeys` remove all entries that contains a key in list.
 - `removeKeysExcept` remove all entries that NOT contains a key in list.
+- `putIfAbsentAsync` put a item if absent or return existent value async.
 
 ## Usage
 
@@ -28,4 +29,8 @@ Map mapNumbers = {'key1':50,'key2':7,'key3':71,'key4':45,'key5':5};
 mapNumbers.reduce<int>((int accumulated, _, value) => (accumulated ?? 0) + (value as int)); // Output 178
 mapNumbers.removeKeys(['key1','key5']); //{'key2':7,'key3':71,'key4':45}
 mapNumbers.removeKeysExcept(['key3']); //{'key3':71}
+var item = await anyMap.putIfAbsentAsync('randomKey', () async {
+        await Future.delayed(Duration(milliseconds: 1500));
+        return 'Random Value';
+      });
 ```
