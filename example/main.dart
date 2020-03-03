@@ -1,6 +1,6 @@
 import 'package:ms_map_utils/ms_map_utils.dart';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   // Compat a Map
   print({'key1': null, 'key2': 'Non Null Value'}.compact());
 
@@ -30,4 +30,11 @@ void main(List<String> args) {
   print(mapNumbers);
   mapNumbers.removeKeysExcept(['key3']);
   print(mapNumbers);
+
+  var item = await justMap.putIfAbsentAsync('randomKey', () async {
+    // do hard work here
+    await Future.delayed(Duration(milliseconds: 1500));
+    return 'Random String';
+  });
+  print(item);
 }

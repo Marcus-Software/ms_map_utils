@@ -61,11 +61,22 @@ void removeKeysExcept(Map map, List keys, [bool recursive = false]) {
   });
 }
 
+Future putIfAbsentAsync<V>(Map map, String key, Future<V> ifAbsent()) async {
+  if (map.containsKey(key)) {
+    return map[key];
+  } else {
+    var value = await ifAbsent();
+    map[key] = value;
+    return value;
+  }
+}
+
 Function _compact = compact;
 Function _trim = trim;
 Function _reduce = reduce;
 Function _removeKeys = removeKeys;
 Function _removeKeysExcept = removeKeysExcept;
+Function _putIfAbsentAsync = putIfAbsentAsync;
 
 extension of on Map {
   Map compact([bool newMap = false]) => _compact(this, newMap) as Map;
@@ -80,4 +91,7 @@ extension of on Map {
 
   void removeKeysExcept(List keys, [bool recursive = false]) =>
       _removeKeysExcept(this, keys, recursive);
+
+  Future putIfAbsentAsync<V>(String key, Future<V> ifAbsent()) async =>
+      _putIfAbsentAsync(this, key, ifAbsent);
 }
