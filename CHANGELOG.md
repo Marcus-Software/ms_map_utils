@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.5.0] - 04/16/2020
+
+* constainsKeys: is like containsKey but support a list of keys e diferente rules
+
 ## [0.4.0] - 03/02/2020
 
-* putIfAbsentAsync
+* putIfAbsentAsync: is like putIfAbsent but with async mode
 
 ## [0.3.0] - 02/11/2020
 

@@ -12,6 +12,7 @@ Add usefull functions to map:
 - `removeKeys` remove all entries that contains a key in list.
 - `removeKeysExcept` remove all entries that NOT contains a key in list.
 - `putIfAbsentAsync` put a item if absent or return existent value async.
+- `containsKeys` check if map contains all keys of list.
 
 ## Usage
 
@@ -33,4 +34,7 @@ var item = await anyMap.putIfAbsentAsync('randomKey', () async {
         await Future.delayed(Duration(milliseconds: 1500));
         return 'Random Value';
       });
+if (mapNumbers.containsKeys(['key1','key2'])) {
+  print('The map contians all keys [key1, key2]');
+}
 ```

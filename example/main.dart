@@ -37,4 +37,8 @@ Future<void> main(List<String> args) async {
     return 'Random String';
   });
   print(item);
+
+  if (mapNumbers.containsKeys(['key1', 'key2'])) {
+    print('The map contians all keys [key1, key2]');
+  }
 }
