@@ -1,75 +1,9 @@
-/// Return a new map without null values
-Map<K, V> compact<K, V>(Map map, [bool newMap = false]) =>
-    (newMap ? Map<K, V>.from(map) : map).cast<K, V>()
-      ..removeWhere((_, value) {
-        if (value is Map && value != null) {
-          compact(value, newMap);
-        } else if (value is List<Map> && value != null) {
-          value.forEach((mapInList) {
-            compact(mapInList, newMap);
-          });
-        }
-        return value == null;
-      });
-
-/// Trim every value is a String if recursive with map and lists with map
-Map trim(Map map, [bool newMap = false]) {
-  return (newMap ? Map.from(map) : map).map((key, value) {
-    var tmpValue = value;
-    if (value is String) {
-      tmpValue = value.trim();
-    } else if (value is Map) {
-      tmpValue = trim(value);
-    } else if (value is List<Map>) {
-      tmpValue = value.cast<Map>().map((vMap) => trim(vMap, newMap)).toList();
-    }
-    return MapEntry(key, tmpValue);
-  });
-}
-
-typedef T ReduceFunction<T>(T accumulated, currentKey, currentValue);
-
-/// Reduce functions
-T reduce<T>(Map map, ReduceFunction<T> reduceFunction) {
-  T accumulated;
-  map.forEach((key, value) {
-    accumulated = reduceFunction(accumulated, key, value);
-  });
-  return accumulated;
-}
-
-void removeKeys(Map map, List keys, [bool recursive = false]) {
-  map.removeWhere((key, value) {
-    if (keys.contains(key)) {
-      return true;
-    } else if (value is Map && recursive) {
-      removeKeys(value, keys, recursive);
-    }
-    return false;
-  });
-}
-
-void removeKeysExcept(Map map, List keys, [bool recursive = false]) {
-  map.removeWhere((key, value) {
-    if (keys.contains(key)) {
-      if (value is Map && recursive) {
-        removeKeysExcept(value, keys, recursive);
-      }
-      return false;
-    }
-    return true;
-  });
-}
-
-Future putIfAbsentAsync<V>(Map map, String key, Future<V> ifAbsent()) async {
-  if (map.containsKey(key)) {
-    return map[key];
-  } else {
-    var value = await ifAbsent();
-    map[key] = value;
-    return value;
-  }
-}
+part './functions/compact.dart';
+part './functions/contains_keys.dart';
+part './functions/put_if_absent_async.dart';
+part './functions/reduce.dart';
+part './functions/remove_keys.dart';
+part './functions/trim.dart';
 
 Function _compact = compact;
 Function _trim = trim;
@@ -77,21 +11,45 @@ Function _reduce = reduce;
 Function _removeKeys = removeKeys;
 Function _removeKeysExcept = removeKeysExcept;
 Function _putIfAbsentAsync = putIfAbsentAsync;
+bool Function(Map map, List keys, {ContainsKeysRules rule}) _containsKeys =
+    containsKeys;
 
-extension of on Map {
+extension MapUtils<K, V> on Map<K, V> {
+  /// Remove all entries that value is null
+  ///
+  /// [newMap] if true return a new map modifield
   Map compact([bool newMap = false]) => _compact(this, newMap) as Map;
 
+  /// Apply trim in all String values on tree
+  ///
+  /// [newMap] if true return a new map modifield
   Map trim([bool newMap = false]) => _trim(this, newMap) as Map;
 
+  /// Reduce
   Tp reduce<Tp>(ReduceFunction<Tp> reduceFunction) =>
       _reduce<Tp>(this, reduceFunction) as Tp;
 
+  /// Remove all values that matches in list of keys
+  ///
+  /// [keys] a list keys to be removed on map
+  /// [recursive] if true seach for keys in three
   void removeKeys(List keys, [bool recursive = false]) =>
       _removeKeys(this, keys, recursive);
 
+  /// Remove all values *except* that matches in list of keys
+  ///
+  /// [keys] a list keys to be keep on map
+  /// [recursive] if true seach for keys in three
   void removeKeysExcept(List keys, [bool recursive = false]) =>
       _removeKeysExcept(this, keys, recursive);
 
-  Future putIfAbsentAsync<V>(String key, Future<V> ifAbsent()) async =>
+  /// Return a value if it exists in map or call [ifAbsent] that's return a new value
+  /// and insert him on map
+  Future putIfAbsentAsync<V>(String key, Future<V> Function() ifAbsent) async =>
       _putIfAbsentAsync(this, key, ifAbsent);
+
+  /// Return true if map contains all keys in list of keys
+  bool containsKeys(List<Object> keys,
+          {ContainsKeysRules rule = ContainsKeysRules.none}) =>
+      _containsKeys(this, keys, rule: rule);
 }
