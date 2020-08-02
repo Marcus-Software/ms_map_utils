@@ -41,4 +41,9 @@ Future<void> main(List<String> args) async {
   if (mapNumbers.containsKeys(['key1', 'key2'])) {
     print('The map contians all keys [key1, key2]');
   }
+
+  mapNumbers.doIfContains(
+    'key1',
+    doWork: (key, value) => print('Has key1 and i will return void'),
+  );
 }
