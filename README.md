@@ -13,6 +13,7 @@ Add usefull functions to map:
 - `removeKeysExcept` remove all entries that NOT contains a key in list.
 - `putIfAbsentAsync` put a item if absent or return existent value async.
 - `containsKeys` check if map contains all keys of list.
+- `doIfContains` do some work if map contains a key.
 
 ## Usage
 
@@ -38,3 +39,20 @@ if (mapNumbers.containsKeys(['key1','key2'])) {
   print('The map contians all keys [key1, key2]');
 }
 ```
+
+### doIfContains
+
+The function `doIfContains` will be call a callback function if the map contains a key ou else it will be a callback function `elseIf` if `elseIf` is null, null will returned.
+
+```dart
+  test('must return a object if contains a key', () {
+    final testMap = {'key1': 'value1', 'key2': 'value2'};
+    final newThing = doIfContains<List<String>>(testMap, 'key2',
+        doWork: (key, value) =>
+            [value.toString(), 'new awesome thing', key.toString()],
+        elseIf: () => ['nothing']);
+    expect(newThing, ['value2', 'new awesome thing', 'key2']);
+  });
+```
+
+see more in [test file](./test/do_if_contains_test.dart).

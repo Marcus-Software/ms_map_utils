@@ -1,8 +1,12 @@
 # Changelog
 
+## [0.6.0] - 08/02/2020
+
+* doIfExists: do something if exists a key and return something
+
 ## [0.5.0] - 04/16/2020
 
-* constainsKeys: is like containsKey but support a list of keys e diferente rules
+* containsKeys: is like containsKey but support a list of keys e diferente rules
 
 ## [0.4.0] - 03/02/2020
 
