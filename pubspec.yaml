@@ -6,5 +6,8 @@ homepage: https://github.com/Marcus-Software/ms_map_utils
 environment:
   sdk: ">=2.6.0 <3.0.0"
 
+dependencies:
+  meta: ^1.2.2
+
 dev_dependencies:
   test: ^1.9.2
