@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.0+1] - 08/03/2020
+
+* improved documentation and refactored tests
+
 ## [0.6.0] - 08/02/2020
 
 * doIfExists: do something if exists a key and return something
