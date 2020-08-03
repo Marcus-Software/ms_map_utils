@@ -7,7 +7,7 @@ Future<void> main(List<String> args) async {
   // Trim all strings values
   print({'key1': '    Imagine random string here   '}.trim());
 
-  Map justMap = {
+  var justMap = {
     'key1': null,
     'key2':
         '         just a String withs extras spaces en start and end            '
@@ -21,7 +21,7 @@ Future<void> main(List<String> args) async {
   // {key2: just a String withs extras spaces en start and end}
   print(justMap.trim());
 
-  Map mapNumbers = {'key1': 50, 'key2': 7, 'key3': 71, 'key4': 45, 'key5': 5};
+  var mapNumbers = {'key1': 50, 'key2': 7, 'key3': 71, 'key4': 45, 'key5': 5};
   // In reduceFunction you must check is acc is null and set a initial value for it
   var sumValues = mapNumbers.reduce<int>((int accumulated, _, value) =>
       (accumulated ?? 0) + (value as int)); // Output 178

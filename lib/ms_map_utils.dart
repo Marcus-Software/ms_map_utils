@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 part './functions/compact.dart';
 part './functions/contains_keys.dart';
 part './functions/put_if_absent_async.dart';

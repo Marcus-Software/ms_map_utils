@@ -32,6 +32,7 @@ void main() {
 
   test('must return throw assertion error if doWork is null', () {
     final testMap = {'key1': 'value1', 'key2': 'value2'};
+    // ignore: missing_required_param
     expect(() => doIfContains<List<String>>(testMap, 'key3'),
         throwsA(TypeMatcher<AssertionError>()));
   });
