@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.0+2] - 08/03/2020
+
+* hotfix meta lib version
+
 ## [0.6.0+1] - 08/03/2020
 
 * improved documentation and refactored tests
