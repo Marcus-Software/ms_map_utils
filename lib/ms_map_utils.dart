@@ -1,12 +1,20 @@
 import 'package:meta/meta.dart';
 
 part './functions/compact.dart';
+
 part './functions/contains_keys.dart';
-part './functions/put_if_absent_async.dart';
-part './functions/reduce.dart';
-part './functions/remove_keys.dart';
-part './functions/trim.dart';
+
+part './functions/diff.dart';
+
 part './functions/do_if_contains.dart';
+
+part './functions/put_if_absent_async.dart';
+
+part './functions/reduce.dart';
+
+part './functions/remove_keys.dart';
+
+part './functions/trim.dart';
 
 final _compact = compact;
 final _trim = trim;
@@ -15,6 +23,7 @@ final _removeKeys = removeKeys;
 final _removeKeysExcept = removeKeysExcept;
 final _putIfAbsentAsync = putIfAbsentAsync;
 final _doIfContains = doIfContains;
+final _diff = diff;
 bool Function(Map map, List keys, {ContainsKeysRules rule}) _containsKeys =
     containsKeys;
 
@@ -62,4 +71,11 @@ extension MapUtils<K, V> on Map<K, V> {
   X doIfContains<X>(Object key,
           {X Function(Object key, Object value) doWork, X Function() elseIf}) =>
       _doIfContains<X>(this, key, doWork: doWork, elseIf: elseIf);
+
+  /// Returns a new map contend only difference between maps
+  /// [to] Map to compare
+  /// [skipNested] If true will skip any nested map and only process if maps is equals. Defaults value is false.
+  Map diff(Map to, [bool skipNested = false]) {
+    return _diff(this, to, skipNested);
+  }
 }

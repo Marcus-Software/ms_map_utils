@@ -39,7 +39,7 @@ Future<void> main(List<String> args) async {
   print(item);
 
   if (mapNumbers.containsKeys(['key1', 'key2'])) {
-    print('The map contians all keys [key1, key2]');
+    print('The map contains all keys [key1, key2]');
   }
 
   mapNumbers.doIfContains(
