@@ -1,6 +1,5 @@
 part of '../ms_map_utils.dart';
 
-
 typedef T ReduceFunction<T>(T accumulated, currentKey, currentValue);
 
 /// Reduce function

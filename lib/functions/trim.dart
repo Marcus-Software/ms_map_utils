@@ -1,9 +1,9 @@
 part of '../ms_map_utils.dart';
 
-  /// Apply trim in all String values on tree
-  ///
-  /// [map] map to trim
-  /// [newMap] if true return a new map modifield
+/// Apply trim in all String values on tree
+///
+/// [map] map to trim
+/// [newMap] if true return a new map modifield
 Map trim(Map map, [bool newMap = false]) {
   return (newMap ? Map.from(map) : map).map((key, value) {
     var tmpValue = value;

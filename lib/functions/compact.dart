@@ -1,9 +1,9 @@
 part of '../ms_map_utils.dart';
 
-  /// Remove all entries that value is null
-  ///
-  /// [map] map to compact
-  /// [newMap] if true return a new map modifield
+/// Remove all entries that value is null
+///
+/// [map] map to compact
+/// [newMap] if true return a new map modifield
 Map<K, V> compact<K, V>(Map map, [bool newMap = false]) =>
     (newMap ? Map<K, V>.from(map) : map).cast<K, V>()
       ..removeWhere((_, value) {
