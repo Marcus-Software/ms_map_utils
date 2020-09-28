@@ -1,6 +1,12 @@
-# Overview [![Pub](https://img.shields.io/pub/v/ms_map_utils.svg)](https://pub.dartlang.org/packages/ms_map_utils)
+# Overview
 
+[![Pub](https://img.shields.io/pub/v/ms_map_utils.svg)](https://pub.dartlang.org/packages/ms_map_utils)
+[![Pub](./coverage_badge.svg)](https://github.com/Marcus-Software/ms_map_utils/tree/master/test)
 ![GitHub stars](https://img.shields.io/github/stars/Marcus-Software/ms_map_utils?style=social)
+<span class="badge-buymeacoffee">
+<a href="https://www.buymeacoffee.com/marcusedu" title="Donate to this project using Buy Me A Coffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg" alt="Buy Me A Coffee donate button" /></a>
+</span>
+
 
 A simple lib to increase Map with useful functions
 
@@ -245,3 +251,5 @@ The function `trim` all Strings in a map _it's recursive_.
 ```
 
 see more in [test file](./test/trim_test.dart).
+
+[See another libs here](https://pub.dev/publishers/marcussoftware.info/packages)
