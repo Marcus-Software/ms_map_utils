@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.7.0] - 09/28/2020
+
+* diff: returns a new map contend only difference between maps
+
 ## [0.6.0+2] - 08/03/2020
 
 * hotfix meta lib version
