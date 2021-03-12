@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0] - 09/28/2020
+
+* NullSafety: upgraded library to use Null Safety
+
 ## [0.7.0] - 09/28/2020
 
 * diff: returns a new map contend only difference between maps

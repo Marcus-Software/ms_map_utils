@@ -11,7 +11,7 @@ void main() {
       'key5': 5,
     };
     var value = mapNumbers
-        .reduce<int>((int acc, _, value) => (acc ?? 0) + (value as int));
+        .reduce<int>((int? acc, _, value) => (acc ?? 0) + (value as int));
     expect(value, 178, reason: 'Value reduced must be 178');
   });
 
@@ -24,7 +24,7 @@ void main() {
       'key5': 5,
     };
     var value = mapNumbers
-        .reduce<int>((int acc, _, value) => (acc ?? 1) * (value as int));
+        .reduce<int>((int? acc, _, value) => (acc ?? 1) * (value as int));
     expect(value, 120, reason: 'Value reduced must be 120');
   });
 
@@ -37,7 +37,7 @@ void main() {
       'key5': 5,
     };
     var value = mapNumbers
-        .reduce<String>((String acc, key, _) => (acc ?? '') + key.toString());
+        .reduce<String>((String? acc, key, _) => (acc ?? '') + key.toString());
     expect(value, 'key1key2key3key4key5',
         reason: 'Value reduced must be "key1key2key3key4key5"');
   });

@@ -1,19 +1,10 @@
-import 'package:meta/meta.dart';
-
 part './functions/compact.dart';
-
 part './functions/contains_keys.dart';
-
 part './functions/diff.dart';
-
 part './functions/do_if_contains.dart';
-
 part './functions/put_if_absent_async.dart';
-
 part './functions/reduce.dart';
-
 part './functions/remove_keys.dart';
-
 part './functions/trim.dart';
 
 final _compact = compact;
@@ -24,8 +15,8 @@ final _removeKeysExcept = removeKeysExcept;
 final _putIfAbsentAsync = putIfAbsentAsync;
 final _doIfContains = doIfContains;
 final _diff = diff;
-bool Function(Map map, List keys, {ContainsKeysRules rule}) _containsKeys =
-    containsKeys;
+bool Function(Map<dynamic, dynamic> map, List<Object> listOfKey,
+    {ContainsKeysRules? rule}) _containsKeys = containsKeys;
 
 extension MapUtils<K, V> on Map<K, V> {
   /// Remove all entries that value is null
@@ -39,7 +30,7 @@ extension MapUtils<K, V> on Map<K, V> {
   Map trim([bool newMap = false]) => _trim(this, newMap);
 
   /// Reduce
-  Tp reduce<Tp>(ReduceFunction<Tp> reduceFunction) =>
+  Tp? reduce<Tp>(ReduceFunction<Tp> reduceFunction) =>
       _reduce<Tp>(this, reduceFunction);
 
   /// Remove all values that matches in list of keys
@@ -58,7 +49,8 @@ extension MapUtils<K, V> on Map<K, V> {
 
   /// Return a value if it exists in map or call [ifAbsent] that's return a new value
   /// and insert him on map
-  Future<V> putIfAbsentAsync(String key, Future<V> Function() ifAbsent) async =>
+  Future<V?> putIfAbsentAsync(
+          String key, Future<V> Function() ifAbsent) async =>
       _putIfAbsentAsync<V>(this, key, ifAbsent);
 
   /// Return true if map contains all keys in list of keys
@@ -68,8 +60,9 @@ extension MapUtils<K, V> on Map<K, V> {
 
   /// Return a result of [doWork] if a map contains a key or return
   /// a result of [elseIf] if non null else will return null
-  X doIfContains<X>(Object key,
-          {X Function(Object key, Object value) doWork, X Function() elseIf}) =>
+  X? doIfContains<X>(dynamic key,
+          {required X Function(dynamic key, dynamic value) doWork,
+          X Function()? elseIf}) =>
       _doIfContains<X>(this, key, doWork: doWork, elseIf: elseIf);
 
   /// Returns a new map contend only difference between maps

@@ -23,7 +23,7 @@ Future<void> main(List<String> args) async {
 
   var mapNumbers = {'key1': 50, 'key2': 7, 'key3': 71, 'key4': 45, 'key5': 5};
   // In reduceFunction you must check is acc is null and set a initial value for it
-  var sumValues = mapNumbers.reduce<int>((int accumulated, _, value) =>
+  var sumValues = mapNumbers.reduce<int>((int? accumulated, _, value) =>
       (accumulated ?? 0) + (value as int)); // Output 178
   print(sumValues);
   mapNumbers.removeKeys(['key1', 'key5']);

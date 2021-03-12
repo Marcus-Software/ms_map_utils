@@ -2,8 +2,8 @@ part of '../ms_map_utils.dart';
 
 /// Return true if map contains all keys in list of keys
 bool containsKeys(Map<dynamic, dynamic> map, List<Object> listOfKey,
-    {ContainsKeysRules rule = ContainsKeysRules.none}) {
-  return _functions[rule ?? ContainsKeysRules.none](map, listOfKey);
+    {ContainsKeysRules? rule = ContainsKeysRules.none}) {
+  return _functions[rule ?? ContainsKeysRules.none]!(map, listOfKey);
 }
 
 enum ContainsKeysRules { none, only }
