@@ -6,6 +6,7 @@ part './functions/put_if_absent_async.dart';
 part './functions/reduce.dart';
 part './functions/remove_keys.dart';
 part './functions/trim.dart';
+part './functions/list_combine.dart';
 
 final _compact = compact;
 final _trim = trim;
