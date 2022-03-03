@@ -1,6 +1,6 @@
 name: ms_map_utils
 description: A dart package that implement a lot of util functions for a Map
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/Marcus-Software/ms_map_utils
 
 environment:

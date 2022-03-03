@@ -18,6 +18,7 @@ Add useful functions to map:
 * [`containsKeys`](#containsKeys) check if map contains all keys of list.
 * [`diff`](#diff) returns a new map contend only difference between maps.
 * [`doIfContains`](#doIfContains) do some work if map contains a key.
+* [`listCombine`](#listCombine) creates an `Map` by using one array for keys and another for its values
 * [`putIfAbsentAsync`](#putIfAbsentAsync) put an item if absent or return existent value async.
 * [`reduce`](#reduce) iterate all items in `Map` for reduce to a unique value returned from callback `ReduceFunction` .
 * [`removeKeysExcept`](#removeKeysExcept) remove all entries that NOT contains a key in list.
@@ -129,6 +130,28 @@ The function `doIfContains` will be call a callback function if the map contains
             [value.toString(), 'new awesome thing', key.toString()],
         elseIf: () => ['nothing']);
     expect(newThing, ['value2', 'new awesome thing', 'key2']);
+  });
+```
+
+see more in [test file](./test/list_combine_test.dart).
+
+## <a name="listCombine"></a>listCombine
+
+The function `listCombine` creates an `Map` by using one array for keys and another for its values.
+
+``` dart
+  test('combine two list as map', () {
+    final keys = ['red', 'green', 'blue', 'white', 'black'];
+    final values = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFFFF, 0x000000];
+    final newMap = listCombine<String, int>(keys, values);
+    expect(newMap is Map<String, int>, isTrue);
+    expect({
+      'red': 0xFF0000,
+      'green': 0x00FF00,
+      'blue': 0x0000FF,
+      'white': 0xFFFFFF,
+      'black': 0x000000,
+    }, newMap);
   });
 ```
 

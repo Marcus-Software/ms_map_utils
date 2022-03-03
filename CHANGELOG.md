@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.0.0] - 09/28/2020
+## [1.1.0] - 03/03/2022
+
+* combine: combine two lists as result in new map with list one is keys and list two is values
+
+## [1.0.0] - 03/12/2021
 
 * NullSafety: upgraded library to use Null Safety
 
